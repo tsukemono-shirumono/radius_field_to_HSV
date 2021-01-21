@@ -9,11 +9,15 @@ def makeImgHSV(thetas,vs=None,ss=None,norm=True):#S:色味,V:明るさ
     elif norm:
         vs=( (vs-np.min(vs))/(np.max(vs)-np.min(vs))*255 +0.5).astype(np.uint8)
     else:
+        vs[vs>255]=255
+        vs[vs<0]=0
         vs=(vs+0.5).astype(np.uint8)
     
     if ss is None:
         ss=np.full((X,Y),255).astype(np.uint8)
     else:
+        ss[ss>255]=255
+        ss[ss<0]=0
         ss=(ss+0.5).astype(np.uint8)
     
     thetas=( 179*( thetas%(2*math.pi) )/(2*math.pi)+0.5 ).astype(np.uint8)
